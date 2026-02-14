@@ -59,3 +59,11 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
+
+gem "simple_form", "~> 5.4"
+
+gem "tailwindcss-rails", "~> 4.4"
+
+gem "ruby_llm", "~> 1.11"
+
+gem "dotenv", groups: [ :development, :test ]
