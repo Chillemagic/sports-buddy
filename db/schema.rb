@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_14_045358) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_14_055913) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,22 +44,35 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_14_045358) do
 
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.bigint "game_team_id"
     t.bigint "model_id"
     t.datetime "updated_at", null: false
+    t.index ["game_team_id"], name: "index_chats_on_game_team_id"
     t.index ["model_id"], name: "index_chats_on_model_id"
   end
 
   create_table "game_team_users", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.bigint "game_team_id"
     t.datetime "remember_created_at"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["game_team_id"], name: "index_game_team_users_on_game_team_id"
     t.index ["user_id"], name: "index_game_team_users_on_user_id"
+  end
+
+  create_table "game_teams", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "game_id"
+    t.string "players", default: [], array: true
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_teams_on_game_id"
   end
 
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "date"
+    t.string "location"
     t.string "teams", default: [], array: true
     t.datetime "updated_at", null: false
   end
@@ -135,8 +148,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_14_045358) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "game_teams"
   add_foreign_key "chats", "models"
+  add_foreign_key "game_team_users", "game_teams"
   add_foreign_key "game_team_users", "users"
+  add_foreign_key "game_teams", "games"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "models"
   add_foreign_key "messages", "tool_calls"
