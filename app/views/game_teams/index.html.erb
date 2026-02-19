@@ -1,0 +1,3 @@
+<% @game_teams.each do |team| %>
+  <%= link_to "Team name:#{team.name}, team id:#{team.id}", game_team_path(team.id)  %>
+<% end %>
