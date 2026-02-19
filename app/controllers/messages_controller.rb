@@ -1,14 +1,11 @@
 class MessagesController < ApplicationController
-  before_action :set_chat
   before_action :authenticate_user!
+  before_action :set_chat
 
   def create
-    return unless content.present?
+    return unless message_content.present?
 
-    @message = @chat.messages.build(content: content, role: "user")
-    @message.save
-
-    ChatResponseJob.perform_later(@chat.id, content)
+    ChatResponseJob.perform_later(@chat.id, message_content)
 
     respond_to do |format|
       format.turbo_stream
@@ -22,7 +19,7 @@ class MessagesController < ApplicationController
     @chat = Chat.find(params[:chat_id])
   end
 
-  def content
+  def message_content
     params[:message][:content]
   end
 end
