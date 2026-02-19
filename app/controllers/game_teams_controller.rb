@@ -1,6 +1,6 @@
 class GameTeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_game_team, only: %i[ create edit destroy]
+  before_action :set_game_team, only: %i[ create show edit destroy]
 
   def index
     @game_teams = GameTeam.all
