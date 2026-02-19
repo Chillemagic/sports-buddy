@@ -24,6 +24,8 @@ User.destroy_all
 Model.destroy_all
 puts "DB clean 🧼"
 
+puts "Refreshing Model, this might take a second"
+Model.refresh!
 puts "creating game 🎮"
 game = Game.create!(date: dt, location: "Henson Park")
 puts "Game created game id:#{game.id}, date:#{game.date}, location:#{game.location}"
@@ -35,4 +37,7 @@ user = User.create!(email: "no@email.com", password: "secret1")
 puts "Successfully created user 😉, User email:#{user.email}"
 gtu = GameTeamUser.create!(user_id: user.id, game_team_id: game_team.id)
 puts "Succesfully created Game Team User, id:#{gtu.id}, user id:#{gtu.user_id}, game_team_id:#{gtu.game_team_id}"
+puts "Creating chat 🗣"
+chat = Chat.create(game_team_id: game_team.id)
+puts "Succsfully created chat, id: #{chat.id}"
 puts "Successfully seeded 🌱"
