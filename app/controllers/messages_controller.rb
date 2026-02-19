@@ -1,8 +1,12 @@
 class MessagesController < ApplicationController
   before_action :set_chat
+  before_action :authenticate_user!
 
   def create
     return unless content.present?
+
+    @message = @chat.messages.build(content: content, role: "user")
+    @message.save
 
     ChatResponseJob.perform_later(@chat.id, content)
 
