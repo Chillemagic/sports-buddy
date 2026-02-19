@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  resources :chats do
+  resources :chats, only: %i[ show edit create] do
     resources :messages, only: [ :create ]
   end
-  resources :models, only: [ :index, :show ] do
+  resources :models, only: %i[ index show ] do
     collection do
       post :refresh
     end
   end
 
   resources :game_teams do
-    resources :game_team_users, only: [:create, :destroy]
+    resources :game_team_users, only: %i[ create destroy ]
+    resources :chats, only: %i[ index new ]
   end
 
   resources :games
