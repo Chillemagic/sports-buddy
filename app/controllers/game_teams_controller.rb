@@ -1,9 +1,13 @@
 class GameTeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_game_team
+  before_action :set_game_team, only: %i[ create edit destroy]
 
   def index
     @game_teams = GameTeam.all
+  end
+
+  def show
+    @chat = @game_team.chats.first
   end
 
   def create
