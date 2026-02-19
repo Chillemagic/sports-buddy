@@ -1,22 +1,29 @@
 Rails.application.routes.draw do
+  get "pages/home"
   resources :chats do
-    resources :messages, only: [ :create ]
+    resources :messages, only: %i[create]
   end
-  resources :models, only: [ :index, :show ] do
+  resources :models, only: %i[index show] do
     collection do
       post :refresh
     end
   end
 
   resources :game_teams do
-    resources :game_team_users, only: [:create, :destroy]
+    resources :game_team_users, only: %i[create destroy]
   end
 
   resources :games
 
   devise_for :users, controllers: { sessions: "users/sessions" }
+
+  resources :users, only: %i[show edit update]
+  get "dashboard", to: "users#dashboard"
+  get "preferences", to: "users#preferences"
+  get "matches", to: "users#matches"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root to: "pages#home"
+  root to: "users#dashboard"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
