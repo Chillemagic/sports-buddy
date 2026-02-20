@@ -1,0 +1,6 @@
+<%= simple_form_for @chat, url: chats_path do |f| %>
+  <%= label_tag :prompt, "What would you like to ask?" %>
+  <%= text_field_tag "chat[prompt]", nil, placeholder: "What would you like to ask?" %>
+  <%= f.hidden_field :game_team_id, value: @game_team.id %>
+  <%= f.button :submit %>
+<% end %>
