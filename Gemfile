@@ -60,6 +60,8 @@ group :development do
   gem "web-console"
 end
 
+gem "cloudinary"
+
 gem "simple_form", "~> 5.4"
 
 gem "tailwindcss-rails", "~> 4.4"
