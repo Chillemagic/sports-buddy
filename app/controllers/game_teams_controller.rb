@@ -8,6 +8,7 @@ class GameTeamsController < ApplicationController
 
   def show
     @current_chat = @game_team.chats.first
+    @chat = @game_team.chats.build
   end
 
   def create
