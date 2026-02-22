@@ -68,4 +68,4 @@ gem "tailwindcss-rails", "~> 4.4"
 
 gem "ruby_llm", "~> 1.12"
 
-gem "dotenv", groups: [ :development, :test ]
+gem "dotenv-rails", groups: [ :development, :test ]

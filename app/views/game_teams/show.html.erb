@@ -1,2 +1,2 @@
 <%= link_to "Chat", chat_path(@current_chat.id) if @current_chat.present? %>
-<%= render "chat_form", chat: @chat, game_team: @game_team  %>
+<%= link_to "Create new chat", new_game_team_chat_path(game_team_id: @game_team.id), class: "btn btn-primary" %>

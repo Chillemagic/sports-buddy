@@ -10,7 +10,7 @@
 require "date"
 dt = DateTime.new(2026, 3, 14, 10, 0, 0)
 
-
+puts ENV["CLOUDINARY_URL"]
 
 puts "Clearing DB 🧹"
 puts "Clearing DB 🧹"
